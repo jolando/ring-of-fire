@@ -1,0 +1,28 @@
+{
+  "targets": {
+    "roff-aa23a": {
+      "hosting": {
+        "Rig-of-Fire": [
+          "roff-aa23a"
+        ]
+      }
+    },
+    "ring-of-fire-52494": {
+      "hosting": {
+        "Rig-of-Fire": [
+          "ring-of-fire-52494"
+        ]
+      }
+    },
+    "ring-of-fire-b4e13": {
+      "hosting": {
+        "Rig-of-Fire": [
+          "ring-of-fire-b4e13"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ring-of-fire-b4e13"
+  }
+}

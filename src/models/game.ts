@@ -1,8 +1,13 @@
+import { ThrowStmt } from "@angular/compiler";
+
 export class Game {
-  public players: string[] = ['Hans', 'Freddy', 'Peter'];
+  public players: string[] = [];
+  public playerImages: string[] = [];
   public stack: string[] = [];
   public playedCard: string[] = [];
   public currentPlayer: number = 0;
+  public pickCardAnimation = false;
+  public currentCard: string = '';
 
   constructor() {
 
@@ -16,11 +21,22 @@ export class Game {
 
     shuffle(this.stack)
   }
+
+  public toJSON() {
+    return {
+      players: this.players,
+      playerImages: this.playerImages,
+      stack: this.stack,
+      playedCard: this.playedCard,
+      currentPlayer: this.currentPlayer,
+      pickCardAnimation: this.pickCardAnimation,
+      currentCard: this.currentCard,
+    };
+  }
 }
 
-
 function shuffle(array: any) {
-  let currentIndex = array.length,  randomIndex: number;
+  let currentIndex = array.length, randomIndex: number;
 
   // While there remain elements to shuffle...
   while (currentIndex != 0) {
