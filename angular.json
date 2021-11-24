@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Rig-of-Fire": {
+    "Ring-of-Fire": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Rig-of-Fire",
+            "outputPath": "dist/Ring-of-Fire",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -42,7 +42,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Rig-of-Fire:build:production"
+              "browserTarget": "Ring-of-Fire:build:production"
             },
             "development": {
-              "browserTarget": "Rig-of-Fire:build:development"
+              "browserTarget": "Ring-of-Fire:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Rig-of-Fire:build"
+            "browserTarget": "Ring-of-Fire:build"
           }
         },
         "test": {
@@ -111,7 +111,7 @@
           "options": {
             "prerender": false,
             "ssr": false,
-            "browserTarget": "Rig-of-Fire:build:production",
+            "browserTarget": "Ring-of-Fire:build:production",
             "firebaseProject": "ring-of-fire-b4e13",
             "firebaseHostingSite": "ring-of-fire-b4e13"
           }
@@ -119,5 +119,5 @@
       }
     }
   },
-  "defaultProject": "Rig-of-Fire"
+  "defaultProject": "Ring-of-Fire"
 }

@@ -1,5 +1,5 @@
 <div *ngIf="gameOver" class="gameover">
-  <img src="../../../assets/img/bggame.jpg">
+  <img src="assets/img/bggame.jpg">
   <h1>gameover</h1>
 </div>
 
@@ -29,18 +29,18 @@
 
       <!--Cardstack-->
       <img [ngStyle]="{'right.px': i * 5 }" *ngFor="let c of [1,2,3,4,5]; let i = index"
-        src="../../../assets/img/playing_cards-master//1329514316.png">
+        src="assets/img/playing_cards-master//1329514316.png">
 
       <img (click)="takeCard()" class="top-card" style="right: 25px;"
-        src="../../../assets/img/playing_cards-master/1329514316.png">
+        src="assets/img/playing_cards-master/1329514316.png">
 
       <!--Stack for played cards-->
       <img class="card-drop" *ngFor="let card of game.playedCard"
-        src="../../../assets/img/playing_cards-master/{{ card }}.png">
+        src="assets/img/playing_cards-master/{{ card }}.png">
 
       <!--Current card animation-->
       <img (click)="takeCard()" *ngIf="game.pickCardAnimation" class="pick-card" style="right: 25px;"
-        src="../../../assets/img/playing_cards-master/{{ game.currentCard }}.png">
+        src="assets/img/playing_cards-master/{{ game.currentCard }}.png">
 
     </div>
   </div>
@@ -52,5 +52,5 @@
     <mat-icon>add</mat-icon>
   </button>
 
-  <img class="preload-card" src="../../../assets/img/playing_cards-master/{{ game.stack[game.stack.length -1] }}.png">
+  <img class="preload-card" src="assets/img/playing_cards-master/{{ game.stack[game.stack.length -1] }}.png">
 </div>
