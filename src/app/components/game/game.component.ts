@@ -1,38 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
-
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+  styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
-
   game: Game;
   gameId: string;
-  gameOver = false;
+  gameOver = true;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-
-
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) {
-
-
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private firestore: AngularFirestore,
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.newGame();
 
     this.route.params.subscribe((params) => {
       this.gameId = params.id;
-      this
-        .firestore
+      this.firestore
         .collection('games')
         .doc(this.gameId)
         .valueChanges()
@@ -43,29 +47,39 @@ export class GameComponent implements OnInit {
           this.game.players = game.players;
           this.game.playerImages = game.playerImages;
           this.game.stack = game.stack;
-          this.game.pickCardAnimation = game.pickCardAnimation,
-            this.game.currentCard = game.currentCard
+          (this.game.pickCardAnimation = game.pickCardAnimation),
+            (this.game.currentCard = game.currentCard);
         });
-    })
+    });
+  }
 
+  openSnackBar() {
+    this._snackBar.open('You have to add a player!', 'Close', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
   }
 
   newGame() {
     this.game = new Game();
+    this.gameOver = false;
   }
 
   takeCard() {
-
+    if (this.game.players.length === 0) {
+      this.openSnackBar();
+      return;
+    }
     if (this.game.stack.length == 0) {
       this.gameOver = true;
     } else if (!this.game.pickCardAnimation) {
       this.game.currentCard = this.game.stack.pop();
       this.game.pickCardAnimation = true;
       this.game.currentPlayer++;
-      console.log(this.game.currentPlayer)
+      console.log(this.game.currentPlayer);
 
-
-      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+      this.game.currentPlayer =
+        this.game.currentPlayer % this.game.players.length;
 
       this.saveGame();
 
@@ -74,10 +88,8 @@ export class GameComponent implements OnInit {
         this.game.pickCardAnimation = false;
         this.saveGame();
       }, 1000);
-
     }
   }
-
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
@@ -89,13 +101,11 @@ export class GameComponent implements OnInit {
         console.log('The dialog was closed', name);
         this.saveGame();
       }
-
     });
   }
 
   saveGame() {
-    this
-      .firestore
+    this.firestore
       .collection('games')
       .doc(this.gameId)
       .update(this.game.toJSON());
@@ -106,23 +116,16 @@ export class GameComponent implements OnInit {
 
     const dialogRef = this.dialog.open(EditPlayerComponent);
 
-
     dialogRef.afterClosed().subscribe((change: string) => {
-
       if (change) {
         if (change == 'DELETE') {
           this.game.players.splice(playerId, 1);
-
         } else {
           console.log('Received changed', change);
           this.game.playerImages[playerId] = change;
-
         }
-
       }
       this.saveGame();
-
     });
-
   }
 }

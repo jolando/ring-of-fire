@@ -5,7 +5,7 @@
   background-image: url("../../../assets/img/bggame.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position:  bottom;
+  background-position: bottom;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,23 +101,51 @@ app-player-mobile {
   }
 }
 
-.gameOver {
+.gameover {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 
-  // img {
-  //   width: 300px;
-  // }
+  img {
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    object-fit: cover;
+  }
 }
 
-// .preload-card {
+.new-game-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
 
-//   width: 0px;
-//   height: 0px;
-//   opacity: 0;
-//   z-index: -999;
-// }
+  h1 {
+    font-size: 60px;
+    color: white;
+    text-align: center;
+  }
+
+  button {
+    border: none;
+    padding: 10px 30px;
+    background-color: red;
+    color: white;
+    font-size: 30px;
+    margin-top: 20px;
+
+    &:hover {
+      background-color: rgba(255, 0, 0, 0.814);
+      cursor: pointer;
+    }
+  }
+}
 
 @media screen and (min-width: 720px) {
   .hide-desktop {
